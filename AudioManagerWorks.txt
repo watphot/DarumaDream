@@ -1,0 +1,4 @@
+Audio Manager
+Necesitamos tenerun string donde queramos instaciar el sonido y tener una referencia del script
+Llamamosal metodo: audioManager.PlaySound("ponemos la string").
+En el audio manager tenemos que poner el audio con el mismo nombre.
