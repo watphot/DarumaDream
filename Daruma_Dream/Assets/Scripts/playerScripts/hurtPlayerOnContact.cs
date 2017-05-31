@@ -26,7 +26,12 @@ public class hurtPlayerOnContact : MonoBehaviour {
         {
 
             haru.ReciveDamage();
+            var player = other.GetComponent<haruMovement>();
+            player.knockBackCount = player.knockBackLenght;
 
+            if (other.transform.position.x < transform.position.x)
+                player.knockFromRight = true;
+            else player.knockFromRight = false;
         }
 
     }

@@ -25,6 +25,11 @@ public class haruMovement : MonoBehaviour {
     public float shotDelay;
     private float shotDelayCounter;
 
+    public float knockBack;
+    public float knockBackLenght;
+    public float knockBackCount;
+    public bool knockFromRight;
+
     [SerializeField]
     private Animator _anim;
     [SerializeField]
@@ -104,7 +109,18 @@ public class haruMovement : MonoBehaviour {
 
         }
 
-        _myrigidbody2D.velocity = new Vector2(_moveVelocity, _myrigidbody2D.velocity.y);
+        if (knockBackCount <= 0)
+        {
+            _myrigidbody2D.velocity = new Vector2(_moveVelocity, _myrigidbody2D.velocity.y);
+        }
+        else
+        {
+            if (knockFromRight)
+                _myrigidbody2D.velocity = new Vector2(-knockBack, knockBack);
+            if(!knockFromRight)
+                _myrigidbody2D.velocity = new Vector2(knockBack, knockBack);
+            knockBackCount -= Time.deltaTime;
+        }
 
         _anim.SetFloat("Speed", Mathf.Abs(_myrigidbody2D.velocity.x));
 
