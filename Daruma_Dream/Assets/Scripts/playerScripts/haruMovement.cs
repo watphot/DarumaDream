@@ -35,6 +35,9 @@ public class haruMovement : MonoBehaviour {
     [SerializeField]
     private LevelManager _myLevelManager;
 
+    public float swordCounter;
+    public bool change;
+
     // Use this for initialization
     void Awake ()
     {
@@ -149,6 +152,23 @@ public class haruMovement : MonoBehaviour {
                 shotDelayCounter = shotDelay;
                 Instantiate(ninjaStart, firePoint.position, firePoint.rotation);
             }
+
+        }
+
+        if (_anim.GetBool("Attack"))
+        {
+            swordCounter += Time.deltaTime;
+            if (swordCounter >= 0.2)
+            {
+                _anim.SetBool("Attack", false);
+                swordCounter = 0;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.V) && swordCounter == 0)
+        {
+
+            _anim.SetBool("Attack", true);
 
         }
 
