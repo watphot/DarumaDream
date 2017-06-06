@@ -155,7 +155,7 @@ public class haruMovement : MonoBehaviour {
 
         }
 
-        if (_anim.GetBool("Attack"))
+        /*if (_anim.GetBool("Attack"))
         {
             swordCounter += Time.deltaTime;
             if (swordCounter >= 0.2)
@@ -163,12 +163,12 @@ public class haruMovement : MonoBehaviour {
                 _anim.SetBool("Attack", false);
                 swordCounter = 0;
             }
-        }
+        }*/
 
         if (Input.GetKeyDown(KeyCode.V) && swordCounter == 0)
         {
 
-            _anim.SetBool("Attack", true);
+            _anim.SetTrigger("DoAttack");
 
         }
 
