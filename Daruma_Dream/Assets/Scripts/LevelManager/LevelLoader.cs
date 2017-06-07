@@ -17,6 +17,13 @@ public class LevelLoader : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (Input.GetKeyDown(KeyCode.K) && _playerInZone)
+        {
+
+            Application.LoadLevel(levelToLoad);
+
+        }
 		
 	}
 
@@ -26,7 +33,19 @@ public class LevelLoader : MonoBehaviour {
         if (other.tag == "Player")
         {
 
-            Debug.Log("Nya");
+            _playerInZone = true;
+
+        }
+
+    }
+
+    void OnTriggerEXit2D(Collider2D other)
+    {
+
+        if (other.tag == "Player")
+        {
+
+            _playerInZone = false;
 
         }
 
