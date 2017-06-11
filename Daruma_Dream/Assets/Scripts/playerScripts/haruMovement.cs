@@ -38,6 +38,11 @@ public class haruMovement : MonoBehaviour {
     public float swordCounter;
     public bool change;
 
+    public bool onLader;
+    public float climbSpeed;
+    private float climVelocity;
+    private float gravityStore;
+
     // Use this for initialization
     void Awake ()
     {
@@ -45,6 +50,7 @@ public class haruMovement : MonoBehaviour {
         curHealth = maxHealth;
         _anim = GetComponent<Animator>();
         _myLevelManager = FindObjectOfType<LevelManager>();
+        gravityStore = _myrigidbody2D.gravityScale;
     }
 	
 	// Update is called once per frame
@@ -155,20 +161,28 @@ public class haruMovement : MonoBehaviour {
 
         }
 
-        /*if (_anim.GetBool("Attack"))
-        {
-            swordCounter += Time.deltaTime;
-            if (swordCounter >= 0.2)
-            {
-                _anim.SetBool("Attack", false);
-                swordCounter = 0;
-            }
-        }*/
-
         if (Input.GetKeyDown(KeyCode.V) && swordCounter == 0)
         {
 
             _anim.SetTrigger("DoAttack");
+
+        }
+
+        if (onLader)
+        {
+
+            _myrigidbody2D.gravityScale = 0f;
+
+            climVelocity = climbSpeed * Input.GetAxisRaw("Vertical");
+
+            _myrigidbody2D.velocity = new Vector2(_myrigidbody2D.velocity.x, climVelocity);
+
+        }
+
+        if (!onLader)
+        {
+
+            _myrigidbody2D.gravityScale = gravityStore;
 
         }
 
