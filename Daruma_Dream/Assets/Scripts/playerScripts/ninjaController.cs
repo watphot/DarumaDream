@@ -51,6 +51,16 @@ public class ninjaController : MonoBehaviour {
 
         }
 
+        if(other.tag == "Boss")
+        {
+
+            /*Instantiate(enemyDeatEffect, other.transform.position, other.transform.rotation);
+            Destroy(other.gameObject);
+            ScoreManager.AddPoints(pointsForKill);*/
+            other.GetComponent<BossHealhtManager>().GiveDamage(damagetogive);
+
+        }
+
         Instantiate(impactEffect, transform.position, transform.rotation);
         Destroy(gameObject);
 

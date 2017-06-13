@@ -7,9 +7,6 @@ public class enemyHealthManager : MonoBehaviour {
     public int enemyHealth;
     public GameObject deathEffect;
     public int pointsOnDeath;
-
-    public 
-
 	// Use this for initialization
 	void Start () {
 		
