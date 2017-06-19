@@ -14,6 +14,10 @@ public class LevelManager : MonoBehaviour {
 	public int pointsOnDeath;
 	public float respawnDelay;
 
+    public GameObject pauseUI;
+
+    public PauseMenu pause;
+
     private CameraController _camera;
 
 	// Use this for initialization
@@ -21,8 +25,9 @@ public class LevelManager : MonoBehaviour {
 
 		haru = FindObjectOfType<haruMovement> ();
         _camera = FindObjectOfType<CameraController>();
+        pause = FindObjectOfType<PauseMenu>();
 
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -46,14 +51,50 @@ public class LevelManager : MonoBehaviour {
 		ScoreManager.AddPoints (-pointsOnDeath);
 
 		Debug.Log("Respawn");
-		yield return new WaitForSeconds (respawnDelay);
-        haruRenderer.GetComponent<Rigidbody2D>().gravityScale = 5f;
-        haru.transform.position = currentCheckPoint.transform.position;
-		haru.enabled = true;
-        haru.MaximizeHealth();
-        _camera.isFollowing = true;
-        haruRenderer.GetComponentInChildren<Renderer> ().enabled = true;
+		yield return new WaitForSeconds (0);
+
+        StartCoroutine(GameOverMenu());
 
 	}
+
+    public IEnumerator Restart()
+    {
+        yield return new WaitForSeconds(respawnDelay);
+        haruRenderer.GetComponent<Rigidbody2D>().gravityScale = 5f;
+        haru.transform.position = currentCheckPoint.transform.position;
+        haru.enabled = true;
+        haru.MaximizeHealth();
+        _camera.isFollowing = true;
+        haruRenderer.GetComponentInChildren<Renderer>().enabled = true;
+
+    }
+
+    public IEnumerator GameOverMenu()
+    {
+        pause.enabled = false;
+
+        yield return new WaitForSeconds(respawnDelay);
+
+        pauseUI.SetActive(true);
+
+        
+
+    }
+
+    public IEnumerator Mainmenu()
+    {
+
+        yield return new WaitForSeconds(2);
+
+        Application.LoadLevel("MainMenu");
+
+    }
+
+    public void MainMenuGO()
+    {
+
+        StartCoroutine(Mainmenu());
+
+    }
 
 }

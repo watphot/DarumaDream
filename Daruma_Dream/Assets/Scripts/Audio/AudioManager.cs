@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 [System.Serializable]
 public class Sound
@@ -21,6 +22,10 @@ public class Sound
 
     public bool loop = false;
 
+    //public AudioMixer myMixer;
+
+    public AudioMixerGroup myGroup;
+
     private AudioSource source;
 
     public void SetSource(AudioSource _source)
@@ -29,6 +34,7 @@ public class Sound
         source = _source;
         source.clip = clip;
         source.loop = loop;
+        source.outputAudioMixerGroup = myGroup;
     }
 
     public void Play()
@@ -82,8 +88,13 @@ public class AudioManager : MonoBehaviour {
             sounds[i].SetSource (_go.AddComponent<AudioSource>());
 
         }
-        PlaySound("Music");
+        PlaySound("MenuTheme");
 
+    }
+
+    private void Update()
+    {
+        Debug.Log(Time.timeScale);
     }
 
     public void PlaySound(string _name)

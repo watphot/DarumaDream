@@ -18,7 +18,7 @@ public class Rename : MonoBehaviour {
 
         myImage = GetComponent<Image>();
         initValue = myImage.rectTransform.position;
-        framesDuration = 5f;
+        //framesDuration = 5f;
         framesCounter = 0;
     }
 

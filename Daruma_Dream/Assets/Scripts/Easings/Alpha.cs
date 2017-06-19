@@ -18,7 +18,7 @@ public class Alpha : MonoBehaviour {
 
         myImage = GetComponent<Image>();
         iniAlpha = myImage.color.a;
-        framesDuration = 3.5f;
+        framesDuration = 1.5f;
         framesCounter = 0;
         Time.timeScale = 1;
 
